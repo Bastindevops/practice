@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy Welcome</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(-45deg,
+                #ff0055, #6600ff, #001eff, #00e5ff);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+        }
+
+        .container {
+            padding: 40px 25px;
+            width: 90%;
+            max-width: 650px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            box-shadow: 0 0 40px #00ffff;
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 10px #00ffff,
+                         0 0 25px #ff00ff;
+            animation: crazy 2s ease-in-out infinite alternate;
+        }
+
+        p {
+            margin: 25px 0;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: #00ffff;
+            color: #111;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px #00ffff;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.12) rotate(-2deg);
+            background: #ff00ff;
+            color: white;
+            box-shadow: 0 0 30px #ff00ff;
+        }
+
+        #message {
+            min-height: 30px;
+            font-weight: bold;
+            color: #ffff00;
+        }
+
+        .emoji {
+            position: fixed;
+            top: -50px;
+            font-size: 30px;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes crazy {
+            from { transform: scale(1) rotate(-2deg); }
+            to { transform: scale(1.06) rotate(2deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>WELCOME! 🚀</h1>
+
+        <p>
+            🎉 Welcome to the CRAZY WORLD! 🎉<br>
+            No rules. No limits. Just pure madness! 🤪
+        </p>
+
+        <div id="message">Are you ready to go CRAZY? 🔥</div>
+
+        <br>
+
+        <button onclick="goCrazy()">
+            CLICK ME 🤯
+        </button>
+    </div>
+
+    <script>
+        const messages = [
+            "🔥 YOU ARE LEGENDARY!",
+            "🚀 TO INFINITY AND BEYOND!",
+            "🤪 CRAZY MODE ACTIVATED!",
+            "⚡ UNLEASH THE BEAST!",
+            "🎉 LET THE MADNESS BEGIN!"
+        ];
+
+        function goCrazy() {
+            const message = document.getElementById("message");
+
+            message.textContent =
+                messages[Math.floor(Math.random() * messages.length)];
+
+            for (let i = 0; i < 30; i++) {
+                const emoji = document.createElement("div");
+
+                emoji.className = "emoji";
+                emoji.textContent =
+                    ["🚀", "🔥", "🎉", "⭐", "🤯", "💥"][
+                        Math.floor(Math.random() * 6)
+                    ];
+
+                emoji.style.left = Math.random() * 100 + "vw";
+                emoji.style.animationDuration =
+                    (2 + Math.random() * 3) + "s";
+
+                document.body.appendChild(emoji);
+
+                emoji.addEventListener("animationend", () => {
+                    emoji.remove();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
